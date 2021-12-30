@@ -6,7 +6,7 @@ export interface User {
     branchId: number,
     role: number,
     status: string,
-    branch: Branch,
+    branch?: Branch,
 }
 
 

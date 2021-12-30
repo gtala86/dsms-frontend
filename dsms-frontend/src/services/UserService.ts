@@ -1,7 +1,13 @@
 import {User} from '../interfaces/Users'
 const base = 'http://localhost:18080/persons'
-const getUrl = (path: string) => `${base}`
+const getUrl = (path: string) => path ? `${base}/${path}` : base
 
+enum Method {
+    POST = "POST",
+    GET = "GET",
+    DELETE = "DELETE",
+    PUT = "PUT",
+}
 let headers = new Headers();
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
@@ -16,12 +22,33 @@ function request<User>(
         .then((data) => data as User);
 }
 
-export const getUsers = () => {
-    return request<User[]>(getUrl(''), {headers: headers})
+
+const postRequest = (user : User, id?: string)=> {
+    return fetch(getUrl(id ? id : ''), {
+        method: id ? Method.PUT :  Method.POST,
+        headers: headers,
+        body: JSON.stringify(user),
+    })
 }
 
- const getUser = () => {}
- const createUser = () => {}
- const deleteUser = ()=> {}
- const updateUser = ()=> {}
+export const getUsers = () => {
+    const init = {headers: headers}
+    return request<User[]>(getUrl(''), init)
+}
+
+export const getUser = (id: string) => {
+     return request<User[]>(getUrl(id), {headers: headers})
+ }
+export const createUser = (user : User) => {
+     return  postRequest(user)
+ }
+
+export const deleteUser = (id: string )=> {
+    const init = {headers: headers, method : Method.DELETE}
+     return fetch(getUrl(id), init)
+ }
+
+export  const updateUser = (newUser: User, id: string)=> {
+    return  postRequest(newUser, id)
+ }
 

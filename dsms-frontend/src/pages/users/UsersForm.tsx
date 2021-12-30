@@ -1,7 +1,21 @@
 import {Button, Form} from "react-bootstrap";
+import {createUser} from "../../services/UserService";
+import {User} from "../../interfaces/Users";
 
 
 const UsersForm = () => {
+    const saveHandlerClick =  ()=> {
+        const myUser : User = { branchId: 0, id: 0, lastName: "", role: 0, status: "", title: "", name: 'Guillermo'}
+         createUser(myUser).then(response => response.json())
+             .then(data => {
+                 alert("User created")
+             })
+             .catch((error) => {
+                 console.error('Error:', error);
+             });
+    }
+
+
     return <div>
         <Form style={{padding: '100px'}}>
 
@@ -40,11 +54,8 @@ const UsersForm = () => {
                 <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
+            <Button onClick={() => saveHandlerClick()}>
+                Save
             </Button>
         </Form>
     </div>

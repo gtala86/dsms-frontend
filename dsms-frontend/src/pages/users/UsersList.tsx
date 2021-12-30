@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getUsers} from "../../services/UserService";
+import {deleteUser, getUsers} from "../../services/UserService";
 import DataTable from "react-data-table-component";
 import {User} from "../../interfaces/Users";
 import {Button} from "react-bootstrap";
@@ -12,8 +12,13 @@ const UserList = ()=> {
         navigate('/users-form')
     }
 
-    const clickDeleteHandler = ()=> {
-        alert()
+    const clickDeleteHandler = (user: User)=> {
+        const {id} = user
+        deleteUser(id.toString()).then( r => {
+            alert("User deleted")
+        })
+
+
     }
 
     const getColumns = () =>  [
@@ -27,11 +32,7 @@ const UserList = ()=> {
             selector:( row  : User) => row.role,
             sortable: true,
         },
-        {
-            name: 'branch',
-            selector:( row  : User) => row.branch && row.branch.name,
-            sortable: true,
-        },
+
         {
             name: 'name',
             selector:( row  : User) => row.name,
@@ -55,7 +56,7 @@ const UserList = ()=> {
         },
         {
             name: 'Delete',
-            cell : () => <Button className={'btn btn-danger'} onClick={clickDeleteHandler}>Delete</Button>,
+            cell : ( row  : User) => <Button className={'btn btn-danger'} onClick={ () => clickDeleteHandler(row)}>Delete</Button>,
             sortable: true,
         },
     ];
@@ -65,11 +66,20 @@ const UserList = ()=> {
         getUsers().then(users => setUsers(users))
     }, [])
 
+    const clickCreateHandler = () => {
+        navigate('/users-form')
+    }
+
     return (
+        <div className={'p-5'}>
+            <div>
+                <Button className={'btn btn-success'} onClick={clickCreateHandler}>Create</Button>
+            </div>
         <DataTable
             columns={getColumns()}
             data={users}
         />
+        </div>
     );
 }
 
