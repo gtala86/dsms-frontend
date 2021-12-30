@@ -4,9 +4,10 @@ import {User} from "../../interfaces/Users";
 
 
 const UsersForm = () => {
-    const saveHandlerClick =  ()=> {
-        const myUser : User = { branchId: 0, id: 0, lastName: "", role: 0, status: "", title: "", name: 'Guillermo'}
-         createUser(myUser).then(response => response.json())
+
+    let userForm : User
+    const saveHandlerClick =  (user: User)=> {
+         createUser(user).then(response => response.json())
              .then(data => {
                  alert("User created")
              })
@@ -14,7 +15,6 @@ const UsersForm = () => {
                  console.error('Error:', error);
              });
     }
-
 
     return <div>
         <Form style={{padding: '100px'}}>
@@ -54,7 +54,7 @@ const UsersForm = () => {
                 <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>
 
-            <Button onClick={() => saveHandlerClick()}>
+            <Button onClick={() => saveHandlerClick(userForm)}>
                 Save
             </Button>
         </Form>

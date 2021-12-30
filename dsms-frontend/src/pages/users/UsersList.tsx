@@ -14,7 +14,7 @@ const UserList = ()=> {
 
     const clickDeleteHandler = (user: User)=> {
         const {id} = user
-        deleteUser(id.toString()).then( r => {
+        deleteUser(id ? id.toString() : '').then( r => {
             alert("User deleted")
         })
 
@@ -28,23 +28,42 @@ const UserList = ()=> {
             sortable: true,
         },
         {
-            name: 'role',
-            selector:( row  : User) => row.role,
-            sortable: true,
-        },
-
-        {
             name: 'name',
             selector:( row  : User) => row.name,
             sortable: true,
         },
         {
-            name: 'LastName',
-            selector:( row  : User) => row.lastName,
+            name: 'position',
+            selector:( row  : User) => row.position,
             sortable: true,
         },
         {
-            name: 'Status',
+            name: 'department',
+            selector:( row  : User) => row.department,
+            sortable: true,
+        },
+        {
+            name: 'street',
+            selector:( row  : User) => row.street,
+            sortable: true,
+        },
+        {
+            name: 'cty',
+            selector:( row  : User) => row.city,
+            sortable: true,
+        },
+        {
+            name: 'phone',
+            selector:( row  : User) => row.phone,
+            sortable: true,
+        },
+        {
+            name: 'email',
+            selector:( row  : User) => row.email,
+            sortable: true,
+        },
+        {
+            name: 'status',
             selector:( row  : User) => row.status,
             sortable: true,
         },

@@ -1,12 +1,19 @@
 export interface User {
-    id: number,
-    name: string,
-    lastName: string,
-    title: string,
-    branchId: number,
-    role: number,
-    status: string,
-    branch?: Branch,
+    id           : number
+    name        :string ,
+    position     :string ,
+    department   :string ,
+    street       :string ,
+    streetNumber :number  ,
+    zipCode      :string ,
+    city         :string ,
+    phone        :string ,
+    mobilePhone  :string ,
+    fax          :string ,
+    email        :string ,
+    branchId     :number  ,
+    login       :string ,
+    status       :string ,
 }
 
 
