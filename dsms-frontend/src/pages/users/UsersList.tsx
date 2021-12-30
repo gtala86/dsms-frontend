@@ -2,8 +2,20 @@ import React, {useEffect, useState} from "react";
 import {getUsers} from "../../services/UserService";
 import DataTable from "react-data-table-component";
 import {User} from "../../interfaces/Users";
+import {Button} from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 const UserList = ()=> {
+    const navigate = useNavigate();
+
+    const  clickEditHandler = ()=> {
+        navigate('/users-form')
+    }
+
+    const clickDeleteHandler = ()=> {
+        alert()
+    }
+
     const getColumns = () =>  [
         {
             name: 'id',
@@ -33,6 +45,17 @@ const UserList = ()=> {
         {
             name: 'Status',
             selector:( row  : User) => row.status,
+            sortable: true,
+        },
+        {
+            name: 'Edit',
+            sortable: true,
+            cell : () => <Button  className={'btn btn-primary'} onClick={clickEditHandler}>Edit</Button>,
+            button: true
+        },
+        {
+            name: 'Delete',
+            cell : () => <Button className={'btn btn-danger'} onClick={clickDeleteHandler}>Delete</Button>,
             sortable: true,
         },
     ];

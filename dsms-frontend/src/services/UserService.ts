@@ -1,5 +1,5 @@
 import {User} from '../interfaces/Users'
-const base = 'http://localhost:18080/users'
+const base = 'http://localhost:18080/persons'
 const getUrl = (path: string) => `${base}`
 
 let headers = new Headers();
