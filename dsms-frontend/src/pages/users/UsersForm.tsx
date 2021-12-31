@@ -29,8 +29,13 @@ const UsersForm = () => {
              });
     }
 
-    return <div>
-        <Form style={{padding: '100px'}}>
+    return <div style={{padding: '100px'}}>
+
+        <h1>
+            User Form
+        </h1>
+
+        <Form >
             <>
                 <FloatingLabel controlId="name"  label="Name" className="mb-3">
                     <Form.Control type="text" placeholder="name" value={user.name} onChange={ (e: any) => handleInputChangeUser("name",  e)} />
